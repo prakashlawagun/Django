@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="container">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-4" data-toggle="modal" data-target="#exampleModal">
+ + Add
+</button>
+
+<!-- Modal -->
+      <form action="" method="POST">
+      {% csrf_token %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Frist Name</label>
+    <input type="text" class="form-control" name="frist_name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="frist name">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Last Name</label>
+    <input type="text" class="form-control" name="last_name" id="exampleInputPassword1" placeholder="last name">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">Email</label>
+    <input type="email" class="form-control" name="email" id="exampleInputPassword1" placeholder="email">
+  </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+    <table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for student in students %}
+    <tr>
+      <th scope="row">{{student.id}}</th>
+      <td>{{student.frist_name}}</td>
+      <td>{{student.last_name}}</td>
+      <td>{{student.email}}</td>
+      <td><a href="update_student/{{student.id}}" class="btn btn-info">Edit</a></td>
+      <td><a href="delete_student/{{student.id}}" class="btn btn-danger">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
